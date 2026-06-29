@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PROJECTION" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.PROJECT_MEDIA" tools:ignore="ProtectedPermissions" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:label="Wintrix Pro"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Wintrix"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="34">
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@mipmap/ic_launcher" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@android:color/holo_green_dark" />
+
+        <activity
+            android:name="im.zego.internal.screencapture.ZegoScreenCaptureManager$ZegoScreenCaptureAssistantActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:configChanges="screenSize|orientation"
+            android:screenOrientation="unspecified"
+            android:exported="false"
+            tools:replace="android:screenOrientation,android:theme" />
+
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".LoginActivity" android:exported="false" android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".RegisterActivity" android:exported="false" android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".HomeActivity" android:exported="false" android:launchMode="singleTask" />
+        
+        <activity android:name=".WalletActivity" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" android:host="wintrixpro.online" android:path="/payment_success" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".WithdrawActivity" android:exported="false" />
+        <activity android:name=".KycActivity" android:exported="false" />
+        <activity android:name=".AccountActivity" android:exported="false" />
+        <activity android:name=".ReferralActivity" android:exported="false" />
+        <activity android:name=".HostMatchActivity" android:exported="false" />
+        <activity android:name=".LiveRoomActivity" android:exported="false" />
+        <activity android:name=".ForgotPasswordActivity" android:exported="false" />
+        <activity android:name=".MyAccountActivity" android:exported="false" />
+        <activity android:name=".PlayersListActivity" android:exported="false" />
+        <activity android:name=".MyMatchesActivity" android:exported="false" />
+        <activity android:name=".LeaderboardActivity" android:exported="false" />
+        <activity android:name=".DepositHistoryActivity" android:exported="false" />
+        <activity android:name=".WithdrawHistoryActivity" android:exported="false" />
+        <activity android:name=".SupportActivity" android:exported="false" />
+        <activity android:name=".GiftCodeActivity" android:exported="false" />
+        <activity android:name=".PolicyActivity" android:exported="false" />
+        
+        <activity
+            android:name=".LiveReelActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:screenOrientation="fullUser"
+            android:theme="@style/Theme.Wintrix" />
+
+        <activity android:name=".TestStreamActivity" android:exported="false" />
+        <activity
+            android:name=".ScreenCapturePermissionActivity"
+            android:excludeFromRecents="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+            
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <service
+            android:name=".FloatingStreamService"
+            android:foregroundServiceType="mediaProjection"
+            android:enabled="true"
+            android:exported="false" />
+
+        <service
+            android:name="im.zego.internal.screencapture.ZegoScreenCaptureService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="mediaProjection"
+            tools:replace="android:foregroundServiceType">
+            <intent-filter>
+                <action android:name="android.intent.action.screenshare" />
+            </intent-filter>
+        </service>
+
+    </application>
+</manifest>
